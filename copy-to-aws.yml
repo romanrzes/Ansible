@@ -125,8 +125,11 @@
                        proxy_pass http://unix:/home/ubuntu/myproject/myproject.sock;
                         }
                  }
-
-  - name: reate symlink
+  - name: Delete old symlink
+    become: true
+    shell: sudo rm -r /etc/nginx/sites-enabled/myproject
+    
+  - name: Create symlink
     become: true
     shell: ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
 
