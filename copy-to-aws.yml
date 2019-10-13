@@ -128,10 +128,12 @@
   - name: Delete old symlink
     become: true
     shell: sudo rm -r /etc/nginx/sites-enabled/myproject
+    ignore_errors: yes
     
   - name: Create symlink
     become: true
     shell: ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
+    ignore_errors: yes
 
   - name: Restart NGINX
     become: true
@@ -142,6 +144,7 @@
   - name: Remove default
     become: true
     shell: rm /etc/nginx/sites-enabled/default
+    ignore_errors: yes
 
   - name: Restart nginx service
     become: true
