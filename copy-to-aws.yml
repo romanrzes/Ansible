@@ -94,6 +94,7 @@
                 After=network.target
 
                 [Service]
+                EnvironmentFile=/etc/environment
                 User=root
                 Group=www-data
                 WorkingDirectory=/home/ubuntu/myproject
@@ -104,20 +105,13 @@
   - name: Create env variables
     become: true
     blockinfile:
-        path: "/home/ubuntu/.bashrc"
+        path: "etc/environment"
         block: |
-                app_secret={{ app_secret }}
+                app_secret {{ app_secret }}
                 mysql_host {{ mysql_host }}
                 mysql_user {{ mysql_user }}
                 mysql_pass {{ mysql_pass }}
                 mysql_db   {{ mysql_db }}
-
-  - name: Source environ
-    become: true
-    shell: source ~/.bashrc
-
-  - name: Grep environ
-    shell: env | grep mysql
 
   - name: Create Myproject file
     become: true
