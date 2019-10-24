@@ -106,7 +106,7 @@
     blockinfile:
         path: "/home/ubuntu/.bashrc"
         block: |
-                app_secret {{ app_secret }}
+                app_secret={{ app_secret }}
                 mysql_host {{ mysql_host }}
                 mysql_user {{ mysql_user }}
                 mysql_pass {{ mysql_pass }}
