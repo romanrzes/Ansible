@@ -107,11 +107,11 @@
     blockinfile:
         path: "/etc/environment"
         block: |
-                app_secret {{ app_secret }}
-                mysql_host {{ mysql_host }}
-                mysql_user {{ mysql_user }}
-                mysql_pass {{ mysql_pass }}
-                mysql_db   {{ mysql_db }}
+                app_secret={{ app_secret }}
+                mysql_host={{ mysql_host }}
+                mysql_user={{ mysql_user }}
+                mysql_pass={{ mysql_pass }}
+                mysql_db={{ mysql_db }}
 
   - name: Create Myproject file
     become: true
