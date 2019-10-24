@@ -105,7 +105,7 @@
   - name: Create env variables
     become: true
     blockinfile:
-        path: "etc/environment"
+        path: "/etc/environment"
         block: |
                 app_secret {{ app_secret }}
                 mysql_host {{ mysql_host }}
