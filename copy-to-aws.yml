@@ -114,7 +114,7 @@
 
   - name: Source environ
     become: true
-    shell: source /home/ubuntu/.bashrc
+    shell: source ~/.bashrc
 
   - name: Grep environ
     shell: env | grep mysql
