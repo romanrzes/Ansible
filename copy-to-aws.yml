@@ -28,7 +28,7 @@
       update_cache: yes
 
   - git:
-      repo: https://github.com/romanrzes/falsk.git
+      repo: https://github.com/il-Putzki/flask-demo.git
       dest: /home/ubuntu/myproject
   
   - name: Install virtualenv via pip
