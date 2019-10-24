@@ -103,7 +103,7 @@
                 [Install]
                 WantedBy=multi-user.target
   - name: Create env variables
-    #become: true
+    become: true
     blockinfile:
         path: "/etc/environment"
         block: |
