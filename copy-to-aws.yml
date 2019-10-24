@@ -24,13 +24,13 @@
         - python3-venv
         - sqlite3
         - nginx
-      state: latest   
+      state: latest
       update_cache: yes
 
   - git:
       repo: https://github.com/il-Putzki/flask-demo.git
       dest: /home/ubuntu/myproject
-  
+
   - name: Install virtualenv via pip
     become: true
     pip:
@@ -40,7 +40,7 @@
   - name: Install requirements
     pip:
       requirements: /home/ubuntu/myproject/requirements.txt
-      virtualenv: /home/ubuntu/myproject   
+      virtualenv: /home/ubuntu/myproject
 
   - name: Install gunicorn
     pip:
@@ -101,6 +101,23 @@
 
                 [Install]
                 WantedBy=multi-user.target
+  - name: Create env variables
+    become: true
+    blockinfile:
+        path: "/home/ubuntu/.bashrc"
+        block: |
+                app_secret {{ app_secret }}
+                mysql_host {{ mysql_host }}
+                mysql_user {{ mysql_user }}
+                mysql_pass {{ mysql_pass }}
+                mysql_db   {{ mysql_db }}
+
+  - name: Source environ
+    become: true
+    shell: source /home/ubuntu/.bashrc
+
+  - name: Grep environ
+    shell: env | grep mysql
 
   - name: Create Myproject file
     become: true
@@ -129,7 +146,7 @@
     become: true
     shell: sudo rm -r /etc/nginx/sites-enabled/myproject
     ignore_errors: yes
-    
+
   - name: Create symlink
     become: true
     shell: ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
@@ -157,4 +174,3 @@
     service:
           name: myproject.service
           state: restarted
-
